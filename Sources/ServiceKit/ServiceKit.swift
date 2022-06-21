@@ -50,10 +50,6 @@ extension Services {
         public subscript<Key: ServiceKey>(key: Key.Type) -> Key.Value {
             services[key]
         }
-
-        public subscript<Value>(keyPath: KeyPath<Services, Value>) -> Value {
-            services[keyPath]
-        }
     }
 
     public subscript<Key: ServiceCompoundKey>(key: Key.Type) -> Key.Value {

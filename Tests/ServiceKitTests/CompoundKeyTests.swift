@@ -9,7 +9,7 @@ struct Container: Equatable {
 struct ContainerKey: ServiceCompoundKey {
 
     static func value(using values: Services.Values) -> Container {
-        Container(value: values[\.string])
+        Container(value: values[StringKey.self])
     }
 }
 
