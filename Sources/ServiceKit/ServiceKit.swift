@@ -33,10 +33,10 @@ public struct Services {
 
 // MARK: - Compound Values
 
-/// A ``ServiceCompound`` is useful for building a service using existing
+/// A ``ServiceCompoundKey`` is useful for building a service using existing
 /// service values to prevent cyclic dependencies, a compound service _cannot_
 /// depend on other compound services.
-public protocol ServiceCompound {
+public protocol ServiceCompoundKey {
     associatedtype Value
     static func value(using values: Services.Values) -> Value
 }
@@ -56,7 +56,7 @@ extension Services {
         }
     }
 
-    public subscript<Key: ServiceCompound>(key: Key.Type) -> Key.Value {
+    public subscript<Key: ServiceCompoundKey>(key: Key.Type) -> Key.Value {
         get { values[ObjectIdentifier(key)] as? Key.Value ?? Key.value(using: Values(services: self)) }
         set { values[ObjectIdentifier(key)] = newValue }
     }

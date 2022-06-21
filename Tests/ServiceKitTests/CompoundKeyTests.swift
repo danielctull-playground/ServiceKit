@@ -6,7 +6,7 @@ struct Container: Equatable {
     let value: String
 }
 
-struct ContainerKey: ServiceCompound {
+struct ContainerKey: ServiceCompoundKey {
 
     static func value(using values: Services.Values) -> Container {
         Container(value: values[\.string])
