@@ -2,18 +2,6 @@
 import ServiceKit
 import XCTest
 
-struct TestKey: ServiceKey {
-    static let defaultValue = "Hello"
-}
-
-extension Services {
-
-    var test: String {
-        get { self[TestKey.self] }
-        set { self[TestKey.self] = newValue }
-    }
-}
-
 final class ServiceKitTests: XCTestCase {
 
     func testGetType() {
@@ -45,5 +33,17 @@ final class ServiceKitTests: XCTestCase {
         let string = UUID().uuidString
         let services = Services().replacing(\.test, with: string)
         XCTAssertEqual(services[\.test], string)
+    }
+}
+
+struct TestKey: ServiceKey {
+    static let defaultValue = "Hello"
+}
+
+extension Services {
+
+    var test: String {
+        get { self[TestKey.self] }
+        set { self[TestKey.self] = newValue }
     }
 }
