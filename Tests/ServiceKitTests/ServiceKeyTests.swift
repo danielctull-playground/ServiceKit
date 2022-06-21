@@ -12,6 +12,12 @@ extension Services {
         get { self[StringKey.self] }
         set { self[StringKey.self] = newValue }
     }
+
+    // Required because there are two subscript methods - One taking KeyPath and
+    // one taking WritableKeyPath. This tests the former readonly variant.
+    var readonlyString: String {
+        self[StringKey.self]
+    }
 }
 
 final class ServiceKeyTests: XCTestCase {
@@ -20,6 +26,7 @@ final class ServiceKeyTests: XCTestCase {
         let services = Services()
         XCTAssertEqual(services[StringKey.self], "Hello")
         XCTAssertEqual(services[\.string], "Hello")
+        XCTAssertEqual(services[\.readonlyString], "Hello")
     }
 
     func testSet() {
@@ -30,6 +37,7 @@ final class ServiceKeyTests: XCTestCase {
             services[StringKey.self] = string
             XCTAssertEqual(services[StringKey.self], string)
             XCTAssertEqual(services[\.string], string)
+            XCTAssertEqual(services[\.readonlyString], string)
         }
 
         do {
@@ -37,6 +45,7 @@ final class ServiceKeyTests: XCTestCase {
             services[\.string] = string
             XCTAssertEqual(services[StringKey.self], string)
             XCTAssertEqual(services[\.string], string)
+            XCTAssertEqual(services[\.readonlyString], string)
         }
     }
 
@@ -45,5 +54,6 @@ final class ServiceKeyTests: XCTestCase {
         let services = Services().replacing(\.string, with: string)
         XCTAssertEqual(services[StringKey.self], string)
         XCTAssertEqual(services[\.string], string)
+        XCTAssertEqual(services[\.readonlyString], string)
     }
 }
