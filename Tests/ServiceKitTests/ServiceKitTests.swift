@@ -27,20 +27,23 @@ final class ServiceKitTests: XCTestCase {
     }
 
     func testSetType() {
+        let string = UUID().uuidString
         var services = Services()
-        services[TestKey.self] = "World"
-        XCTAssertEqual(services[TestKey.self], "World")
+        services[TestKey.self] = string
+        XCTAssertEqual(services[TestKey.self], string)
     }
 
 
     func testSetKeyPath() {
+        let string = UUID().uuidString
         var services = Services()
-        services[\.test] = "World"
-        XCTAssertEqual(services[\.test], "World")
+        services[\.test] = string
+        XCTAssertEqual(services[\.test], string)
     }
 
     func testReplacing() {
-        let services = Services().replacing(\.test, with: "World")
-        XCTAssertEqual(services[\.test], "World")
+        let string = UUID().uuidString
+        let services = Services().replacing(\.test, with: string)
+        XCTAssertEqual(services[\.test], string)
     }
 }
