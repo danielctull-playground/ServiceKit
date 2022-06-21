@@ -38,4 +38,9 @@ final class ServiceKitTests: XCTestCase {
         services[\.test] = "World"
         XCTAssertEqual(services[\.test], "World")
     }
+
+    func testReplacing() {
+        let services = Services().replacing(\.test, with: "World")
+        XCTAssertEqual(services[\.test], "World")
+    }
 }

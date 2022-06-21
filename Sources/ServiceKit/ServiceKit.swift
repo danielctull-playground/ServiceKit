@@ -19,4 +19,10 @@ public struct Services {
         get { self[keyPath: keyPath] }
         set { self[keyPath: keyPath] = newValue }
     }
+
+    public func replacing<Value>(_ keyPath: WritableKeyPath<Self, Value>, with value: Value) -> Self {
+        var services = self
+        services[keyPath] = value
+        return services
+    }
 }
